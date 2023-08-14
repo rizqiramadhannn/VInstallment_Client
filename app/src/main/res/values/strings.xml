@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">VInstallment</string>
+    <string name="sisa_cicilan">Sisa cicilan</string>
+    <string name="rp_0_00">Rp. 0,00</string>
+</resources>
