@@ -2,4 +2,9 @@
     <string name="app_name">VInstallment</string>
     <string name="sisa_cicilan">Sisa cicilan</string>
     <string name="rp_0_00">Rp. 0,00</string>
+    <string name="your_eula_title">End User License Agreement (EULA)</string>
+    <string name="your_eula_text">This device will be managed and maintained by VInstallment during the installment period. The terms and conditions of VInstallment will apply throughout the installment period.</string>
+    <string name="accept_and_continue_button">Accept and continue</string>
+    <string name="setup_complete_welcome">Setup Complete, Welcome</string>
+    <string name="icon">VInstallment Image</string>
 </resources>
