@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -8,27 +9,29 @@
     <!-- First Half -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:paddingTop="10dp"
-        android:layout_height="0dp"
+        android:paddingTop="@dimen/sm"
+        android:layout_height="@dimen/zero"
         android:layout_weight="3"
-        android:paddingHorizontal="8dp"
+        android:paddingHorizontal="@dimen/sm"
         android:background="@color/primary"
         android:orientation="vertical">
 
         <!-- First Third -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="@dimen/zero"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:padding="@dimen/sm"
+            tools:ignore="NestedWeights">
 
             <!-- User Picture -->
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="@dimen/x_lg"
+                android:layout_height="@dimen/x_lg"
                 android:src="@drawable/ic_user"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/username" />
 
             <!-- Title and Subtitle Container (Right of Picture) -->
             <LinearLayout
@@ -36,24 +39,24 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:gravity="start"
-                android:paddingStart="10dp">
+                android:paddingHorizontal="@dimen/sm">
 
                 <!-- User Title (Name) -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Username"
+                    android:text="@string/username"
                     android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:layout_marginBottom="5dp" />
+                    android:textSize="@dimen/md"
+                    android:layout_marginBottom="@dimen/x_sm" />
 
                 <!-- User Subtitle -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Jumlah cicilan"
+                    android:text="@string/total_installment_count"
                     android:textColor="#CBCBCB"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/md" />
 
             </LinearLayout>
 
@@ -62,33 +65,34 @@
         <!-- Second Third -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="@dimen/zero"
             android:layout_weight="1"
-            android:layout_marginBottom="10dp"
-            android:paddingHorizontal="8dp"
-            android:orientation="horizontal">
+            android:layout_marginBottom="@dimen/sm"
+            android:paddingHorizontal="@dimen/sm"
+            android:orientation="horizontal"
+            android:baselineAligned="false">
 
             <!-- First Container -->
 
             <!-- Second Container -->
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="@dimen/zero"
                 android:background="@drawable/rounded_background_button"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:layout_marginRight="8dp"
+                android:layout_marginHorizontal="@dimen/sm"
                 android:gravity="center_vertical"
-                android:padding="10dp">
+                android:padding="@dimen/sm">
 
                 <!-- Title for First Container -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
-                    android:layout_marginBottom="5dp"
-                    android:text="@string/sisa_cicilan"
-                    android:textSize="14sp" />
+                    android:layout_marginBottom="@dimen/x_sm"
+                    android:text="@string/remaining_installment_title"
+                    android:textSize="@dimen/md" />
 
                 <!-- Subtitle for First Container -->
                 <TextView
@@ -96,28 +100,28 @@
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     android:layout_height="wrap_content"
-                    android:text="@string/rp_0_00"
-                    android:textSize="18sp" />
+                    android:text="@string/remaining_installment"
+                    android:textSize="@dimen/md" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="@dimen/zero"
                 android:background="@drawable/rounded_background_secondary"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="center_vertical"
-                android:padding="10dp">
+                android:padding="@dimen/sm">
 
                 <!-- Title for First Container -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
-                    android:layout_marginBottom="5dp"
-                    android:text="Total nominal cicilan"
-                    android:textSize="14sp" />
+                    android:layout_marginBottom="@dimen/x_sm"
+                    android:text="@string/installment_total_title"
+                    android:textSize="@dimen/md" />
 
                 <!-- Subtitle for First Container -->
                 <TextView
@@ -125,8 +129,8 @@
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     android:layout_height="wrap_content"
-                    android:text="Rp. 0,00"
-                    android:textSize="18sp" />
+                    android:text="@string/installment_total"
+                    android:textSize="@dimen/md" />
 
             </LinearLayout>
 
@@ -135,25 +139,27 @@
         <!-- Third Third -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="@dimen/zero"
             android:layout_weight="1"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal">
+            android:layout_marginBottom="@dimen/sm"
+            android:orientation="horizontal"
+            android:baselineAligned="false">
 
             <!-- First Container in Third Third -->
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="@dimen/zero"
                 android:layout_height="match_parent"
                 android:layout_weight="7"
                 android:gravity="center"
-                android:padding="10dp">
+                android:padding="@dimen/sm">
 
                 <!-- User Picture for First Container in Third Third -->
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/ic_calendar"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/calendar" />
 
                 <!-- Title and Subtitle for First Container in Third Third -->
                 <LinearLayout
@@ -161,25 +167,25 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:gravity="center_vertical"
-                    android:paddingStart="10dp">
+                    android:paddingHorizontal="@dimen/sm">
 
                     <!-- Title for First Container in Third Third -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Jatuh Tempo"
-                        android:textSize="14sp"
+                        android:text="@string/deadline_title"
+                        android:textSize="@dimen/md"
                         android:textStyle="bold"
                         android:textColor="@color/white"
-                        android:layout_marginBottom="5dp" />
+                        android:layout_marginBottom="@dimen/x_sm" />
 
                     <!-- Subtitle for First Container in Third Third -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tanggal 1"
+                        android:text="@string/deadline"
                         android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        android:textSize="@dimen/md" />
 
                 </LinearLayout>
 
@@ -187,18 +193,19 @@
 
             <!-- Second Container in Third Third -->
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="@dimen/zero"
                 android:layout_height="match_parent"
                 android:layout_weight="8"
                 android:gravity="center"
-                android:padding="10dp">
+                android:padding="@dimen/sm">
 
                 <!-- User Picture for First Container in Third Third -->
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/ic_wallet"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/wallet" />
 
                 <!-- Title and Subtitle for First Container in Third Third -->
                 <LinearLayout
@@ -206,25 +213,25 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:gravity="center_vertical"
-                    android:paddingStart="10dp">
+                    android:paddingHorizontal="@dimen/sm">
 
                     <!-- Title for First Container in Third Third -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Minimal Pembayaran"
-                        android:textSize="14sp"
+                        android:text="@string/minimum_paid_title"
+                        android:textSize="@dimen/md"
                         android:textStyle="bold"
                         android:textColor="@color/white"
-                        android:layout_marginBottom="5dp" />
+                        android:layout_marginBottom="@dimen/x_sm" />
 
                     <!-- Subtitle for First Container in Third Third -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Rp 0,00"
+                        android:text="@string/minimum_paid"
                         android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        android:textSize="@dimen/md" />
 
                 </LinearLayout>
 
@@ -237,7 +244,7 @@
     <!-- Second Half -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/zero"
         android:layout_weight="5"
         android:orientation="vertical">
 
@@ -245,37 +252,37 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Punishment / Hukuman :"
+            android:text="@string/punishment_title"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="20sp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="@dimen/sm"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp" />
+            android:layout_marginBottom="@dimen/sm" />
 
         <!-- Container 1 in Second Half -->
         <LinearLayout
-            android:layout_marginHorizontal="8dp"
+            android:layout_marginHorizontal="@dimen/sm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="@dimen/sm"
             android:background="@drawable/rounded_background_primary"
-            android:paddingHorizontal="10dp"
-            android:paddingVertical="16dp">
+            android:paddingHorizontal="@dimen/sm"
+            android:paddingVertical="@dimen/md">
 
             <!-- Number -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:text="1"
+                android:text="@string/first_punishment_number"
                 android:background="@drawable/rounded_background_secondary"
                 android:layout_gravity="center_vertical"
-                android:textSize="24sp"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="8dp"
-                android:layout_marginEnd="10dp" />
+                android:textSize="@dimen/md_lg"
+                android:paddingHorizontal="@dimen/md"
+                android:paddingVertical="@dimen/sm"
+                android:layout_marginEnd="@dimen/sm" />
 
             <!-- Title and Subtitle Container (Right of Number) -->
             <LinearLayout
@@ -284,63 +291,62 @@
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:textColor="@color/white"
-                android:paddingStart="10dp">
+                android:paddingHorizontal="@dimen/sm">
 
                 <!-- Title -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hukuman terlambat bayar satu hari"
-                    android:textSize="14sp"
+                    android:text="@string/first_punishment_title"
+                    android:textSize="@dimen/md"
                     android:textStyle="bold"
                     android:textColor="@color/white"
-                    android:layout_marginBottom="5dp" />
+                    android:layout_marginBottom="@dimen/x_sm" />
 
                 <!-- Subtitle -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hukuman ini akan menonaktifkan aplikasi kamera"
+                    android:text="@string/first_punishment"
                     android:textColor="@color/white"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/md" />
 
             </LinearLayout>
 
-            <!-- "Tidak aktif" Text (Right of Title and Subtitle) -->
             <TextView
                 android:layout_width="40dp"
                 android:gravity="center_horizontal"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:maxLines="2"
-                android:text="Tidak aktif"
+                android:text="@string/punishment_not_active"
                 android:textColor="@color/white"
-                android:textSize="14sp" />
+                android:textSize="@dimen/md" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginHorizontal="8dp"
+            android:layout_marginHorizontal="@dimen/sm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="@dimen/sm"
             android:background="@drawable/rounded_background_primary"
-            android:paddingHorizontal="10dp"
-            android:paddingVertical="16dp">
+            android:paddingHorizontal="@dimen/sm"
+            android:paddingVertical="@dimen/md">
 
             <!-- Number -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:text="2"
+                android:text="@string/second_punishment_number"
                 android:background="@drawable/rounded_background_secondary"
                 android:layout_gravity="center_vertical"
-                android:textSize="24sp"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="8dp"
-                android:layout_marginEnd="10dp" />
+                android:textSize="@dimen/md_lg"
+                android:paddingHorizontal="@dimen/md"
+                android:paddingVertical="@dimen/sm"
+                android:layout_marginEnd="@dimen/sm" />
 
             <!-- Title and Subtitle Container (Right of Number) -->
             <LinearLayout
@@ -349,63 +355,62 @@
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:textColor="@color/white"
-                android:paddingStart="10dp">
+                android:paddingHorizontal="@dimen/sm">
 
                 <!-- Title -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hukuman terlambat bayar dua hari"
-                    android:textSize="14sp"
+                    android:text="@string/second_punishment_title"
+                    android:textSize="@dimen/md"
                     android:textStyle="bold"
                     android:textColor="@color/white"
-                    android:layout_marginBottom="5dp" />
+                    android:layout_marginBottom="@dimen/x_sm" />
 
                 <!-- Subtitle -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hukuman ini akan menonaktifkan semua aplikasi kecuali aplikasi komunikasi seperti whatsapp, telepon, sms."
+                    android:text="@string/second_punishment"
                     android:textColor="@color/white"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/md" />
 
             </LinearLayout>
 
-            <!-- "Tidak aktif" Text (Right of Title and Subtitle) -->
             <TextView
                 android:layout_width="40dp"
                 android:gravity="center_horizontal"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:maxLines="2"
-                android:text="Tidak aktif"
+                android:text="@string/punishment_not_active"
                 android:textColor="@color/white"
-                android:textSize="14sp" />
+                android:textSize="@dimen/md" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginHorizontal="8dp"
+            android:layout_marginHorizontal="@dimen/sm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="@dimen/sm"
             android:background="@drawable/rounded_background_primary"
-            android:paddingHorizontal="10dp"
-            android:paddingVertical="16dp">
+            android:paddingHorizontal="@dimen/sm"
+            android:paddingVertical="@dimen/md">
 
             <!-- Number -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:text="3"
+                android:text="@string/third_punishment_number"
                 android:background="@drawable/rounded_background_secondary"
                 android:layout_gravity="center_vertical"
-                android:textSize="24sp"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="8dp"
-                android:layout_marginEnd="10dp" />
+                android:textSize="@dimen/md_lg"
+                android:paddingHorizontal="@dimen/md"
+                android:paddingVertical="@dimen/sm"
+                android:layout_marginEnd="@dimen/sm" />
 
             <!-- Title and Subtitle Container (Right of Number) -->
             <LinearLayout
@@ -414,40 +419,52 @@
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:textColor="@color/white"
-                android:paddingStart="10dp">
+                android:paddingHorizontal="@dimen/sm">
 
                 <!-- Title -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hukuman terlambat bayar tiga hari"
-                    android:textSize="14sp"
+                    android:text="@string/third_punishment_title"
+                    android:textSize="@dimen/md"
                     android:textStyle="bold"
                     android:textColor="@color/white"
-                    android:layout_marginBottom="5dp" />
+                    android:layout_marginBottom="@dimen/x_sm" />
 
                 <!-- Subtitle -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hukuman ini membuat device akan mengeluarkan suara setiap satu jam"
+                    android:text="@string/third_punishment"
                     android:textColor="@color/white"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/md" />
 
             </LinearLayout>
 
-            <!-- "Tidak aktif" Text (Right of Title and Subtitle) -->
             <TextView
                 android:layout_width="40dp"
                 android:gravity="center_horizontal"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:maxLines="2"
-                android:text="Tidak aktif"
+                android:text="@string/punishment_not_active"
                 android:textColor="@color/white"
-                android:textSize="14sp" />
+                android:textSize="@dimen/md" />
 
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/payment_button"
+                android:background="@drawable/rounded_background_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="@string/confirm_payment" />
+        </LinearLayout>
+
 
 
     </LinearLayout>

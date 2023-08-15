@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="punishment_not_active">Tidak aktif</string>
+    <string name="third_punishment">Hukuman ini membuat device akan mengeluarkan suara setiap satu jam</string>
+    <string name="third_punishment_title">Hukuman terlambat bayar tiga hari</string>
+    <string name="second_punishment">Hukuman ini akan menonaktifkan semua aplikasi kecuali aplikasi komunikasi seperti whatsapp, telepon, sms.</string>
+    <string name="second_punishment_title">Hukuman terlambat bayar dua hari</string>
+    <string name="first_punishment">Hukuman ini akan menonaktifkan aplikasi kamera</string>
+    <string name="punishment_title">Punishment / Hukuman :</string>
+    <string name="first_punishment_number">1</string>
+</resources>

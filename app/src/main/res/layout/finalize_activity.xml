@@ -21,15 +21,13 @@
             android:layout_height="250dp"
             android:src="@drawable/icon"
             android:layout_gravity="center"
-            android:contentDescription="@string/icon"
-            android:visibility="invisible" />
+            android:contentDescription="@string/icon"/>
 
         <TextView
             android:id="@+id/blinkingText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/setup_complete_welcome"
-            android:visibility="invisible" />
+            android:text="@string/setup_complete_welcome"/>
     </LinearLayout>
 
     <LinearLayout
@@ -45,6 +43,7 @@
             android:background="@drawable/rounded_background_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="Start using your phone" />
     </LinearLayout>
 

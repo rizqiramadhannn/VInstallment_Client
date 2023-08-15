@@ -29,6 +29,8 @@ public class FinalizeActivity extends Activity {
             }
         });
 
+        //TODO : cek dpm isAdminActive
+
         // Start blinking animation for the image and text
         startBlinkingAnimation();
     }
@@ -39,14 +41,14 @@ public class FinalizeActivity extends Activity {
 
         // Create fade in and fade out animations
         ObjectAnimator imageFadeIn = ObjectAnimator.ofFloat(blinkingImage, "alpha", 0f, 1f);
-        imageFadeIn.setDuration(500);
+        imageFadeIn.setDuration(2000);
         ObjectAnimator imageFadeOut = ObjectAnimator.ofFloat(blinkingImage, "alpha", 1f, 0f);
-        imageFadeOut.setDuration(500);
+        imageFadeOut.setDuration(2000);
 
         ObjectAnimator textFadeIn = ObjectAnimator.ofFloat(blinkingText, "alpha", 0f, 1f);
-        textFadeIn.setDuration(500);
+        textFadeIn.setDuration(2000);
         ObjectAnimator textFadeOut = ObjectAnimator.ofFloat(blinkingText, "alpha", 1f, 0f);
-        textFadeOut.setDuration(500);
+        textFadeOut.setDuration(2000);
 
         // Create animation sets for image and text
         final AnimatorSet imageBlink = new AnimatorSet();
