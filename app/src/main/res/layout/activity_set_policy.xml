@@ -213,14 +213,4 @@
         </LinearLayout>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/saveButton"
-        android:layout_width="wrap_content"
-        android:layout_marginHorizontal="@dimen/md"
-        android:layout_height="wrap_content"
-        android:text="Save Policies"
-        app:layout_constraintTop_toBottomOf="@id/h_plus_3"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="16dp"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -35,10 +35,9 @@ public class GetProvisioningModeActivity extends Activity {
             }
         });
     }
-
+    // TODO tambahin "android.app.extra.PROVISIONING_ADMIN_EXTRAS_BUNDLE"
     @Override
-    public void onBackPressed() {
-        setResult(RESULT_CANCELED);
+    public void onBackPressed() {        setResult(RESULT_CANCELED);
         super.onBackPressed();
     }
 

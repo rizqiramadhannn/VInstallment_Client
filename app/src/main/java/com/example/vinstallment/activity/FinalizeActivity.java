@@ -4,6 +4,9 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.vinstallment.R;
+import com.example.vinstallment.receiver.MyDeviceAdminReceiver;
+import com.example.vinstallment.service.PunishmentService;
 
 public class FinalizeActivity extends Activity {
     private Button nextButton;
@@ -21,11 +26,15 @@ public class FinalizeActivity extends Activity {
         setContentView(R.layout.finalize_activity);
 
         nextButton = findViewById(R.id.do_button);
+        DevicePolicyManager devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
+        ComponentName adminComponent = new ComponentName(this, MyDeviceAdminReceiver.class);
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setResult(RESULT_OK);
-                finish();
+                if (devicePolicyManager.isAdminActive(adminComponent)){
+                    setResult(RESULT_OK);
+                    finish();
+                }
             }
         });
 

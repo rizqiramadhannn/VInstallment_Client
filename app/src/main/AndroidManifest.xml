@@ -5,12 +5,15 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
-
+    <permission
+        android:name="com.example.vinstallment.BIND_PUNISHMENT_SERVICE"/>
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.REBOOT" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
@@ -51,7 +54,6 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.SetPolicyActivity"/>
         <receiver
             android:name=".receiver.MyDeviceAdminReceiver"
             android:exported="true"
@@ -69,7 +71,16 @@
                 <action android:name="android.app.action.DEVICE_OWNER_CHANGED"/>
             </intent-filter>
         </receiver>
-        <service android:name=".service.ThirdPunishmentService"/>
+        <service android:name=".service.PunishmentService"
+            android:permission="com.example.vinstallment.BIND_PUNISHMENT_SERVICE"
+            android:exported="true"
+            android:process=":remote"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="com.example.vinstallment.VInstallmentAIDL"/>
+            </intent-filter>
+        </service>
+        <activity android:name=".activity.SetPolicyActivity"/>
     </application>
 
 </manifest>

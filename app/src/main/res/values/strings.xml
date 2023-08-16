@@ -8,6 +8,7 @@
     <string name="setup_complete_welcome">Setup Complete, Welcome</string>
     <string name="icon">VInstallment Image</string>
     <string name="punishment_not_active">Tidak aktif</string>
+    <string name="punishment_active">Aktif</string>
     <string name="third_punishment">Hukuman ini membuat device akan mengeluarkan suara setiap satu jam</string>
     <string name="third_punishment_title">Hukuman terlambat bayar tiga hari</string>
     <string name="second_punishment">Hukuman ini akan menonaktifkan semua aplikasi kecuali aplikasi komunikasi seperti whatsapp, telepon, sms.</string>

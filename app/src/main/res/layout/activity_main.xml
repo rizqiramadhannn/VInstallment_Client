@@ -314,6 +314,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/firstPunishment"
                 android:layout_width="40dp"
                 android:gravity="center_horizontal"
                 android:layout_height="wrap_content"
@@ -378,6 +379,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/secondPunishment"
                 android:layout_width="40dp"
                 android:gravity="center_horizontal"
                 android:layout_height="wrap_content"
@@ -442,6 +444,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/thirdPunishment"
                 android:layout_width="40dp"
                 android:gravity="center_horizontal"
                 android:layout_height="wrap_content"
