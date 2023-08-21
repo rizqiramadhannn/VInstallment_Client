@@ -320,7 +320,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:maxLines="2"
-                android:text="@string/punishment_not_active"
                 android:textColor="@color/white"
                 android:textSize="@dimen/md" />
 
@@ -385,7 +384,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:maxLines="2"
-                android:text="@string/punishment_not_active"
                 android:textColor="@color/white"
                 android:textSize="@dimen/md" />
 
@@ -450,7 +448,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:maxLines="2"
-                android:text="@string/punishment_not_active"
                 android:textColor="@color/white"
                 android:textSize="@dimen/md" />
 

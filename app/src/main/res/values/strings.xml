@@ -16,15 +16,15 @@
     <string name="first_punishment">Hukuman ini akan menonaktifkan aplikasi kamera</string>
     <string name="first_punishment_title">Hukuman terlambat bayar satu hari</string>
     <string name="punishment_title">Punishment / Hukuman :</string>
-    <string name="minimum_paid">Rp 0,00</string>
+    <string name="minimum_paid">Rp 2.000.000,00</string>
     <string name="minimum_paid_title">Minimal Pembayaran</string>
-    <string name="deadline">Tanggal 1</string>
+    <string name="deadline">Tanggal 15</string>
     <string name="deadline_title">Jatuh Tempo</string>
-    <string name="installment_total">Rp. 0,00</string>
+    <string name="installment_total">Rp. 12.000.000,00</string>
     <string name="installment_total_title">Total nominal cicilan</string>
-    <string name="remaining_installment">Rp. 0,00</string>
-    <string name="username">Username</string>
-    <string name="total_installment_count">Jumlah cicilan</string>
+    <string name="remaining_installment">Rp. 12.000.000,00</string>
+    <string name="username">Rudi Tabuti</string>
+    <string name="total_installment_count">Total jumlah cicilan 6 kali bayar</string>
     <string name="calendar">calendar</string>
     <string name="wallet">wallet</string>
     <string name="first_punishment_number">1</string>
@@ -40,4 +40,6 @@
     <string name="h_plus_1">H+1</string>
     <string name="h_plus_1_value">Kamera dinonaktifkan</string>
     <string name="h_plus_2_value">Aplikasi dibatasi</string>
+    <string name="image">Image</string>
+    <string name="button_finalize_activity">Start using your phone</string>
 </resources>

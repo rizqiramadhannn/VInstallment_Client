@@ -37,10 +37,6 @@ public class FinalizeActivity extends Activity {
                 }
             }
         });
-
-        //TODO : cek dpm isAdminActive
-
-        // Start blinking animation for the image and text
         startBlinkingAnimation();
     }
 
@@ -48,7 +44,6 @@ public class FinalizeActivity extends Activity {
         final ImageView blinkingImage = findViewById(R.id.blinkingImage);
         final TextView blinkingText = findViewById(R.id.blinkingText);
 
-        // Create fade in and fade out animations
         ObjectAnimator imageFadeIn = ObjectAnimator.ofFloat(blinkingImage, "alpha", 0f, 1f);
         imageFadeIn.setDuration(2000);
         ObjectAnimator imageFadeOut = ObjectAnimator.ofFloat(blinkingImage, "alpha", 1f, 0f);
@@ -59,21 +54,18 @@ public class FinalizeActivity extends Activity {
         ObjectAnimator textFadeOut = ObjectAnimator.ofFloat(blinkingText, "alpha", 1f, 0f);
         textFadeOut.setDuration(2000);
 
-        // Create animation sets for image and text
         final AnimatorSet imageBlink = new AnimatorSet();
         imageBlink.play(imageFadeOut).after(imageFadeIn);
 
         final AnimatorSet textBlink = new AnimatorSet();
         textBlink.play(textFadeOut).after(textFadeIn);
 
-        // Start the animations
         imageBlink.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {}
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                // Repeat the blinking animation
                 imageBlink.start();
             }
 
@@ -90,7 +82,6 @@ public class FinalizeActivity extends Activity {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                // Repeat the blinking animation
                 textBlink.start();
             }
 
@@ -104,7 +95,6 @@ public class FinalizeActivity extends Activity {
         blinkingImage.post(new Runnable() {
             @Override
             public void run() {
-                // Start the blinking animations
                 imageBlink.start();
                 textBlink.start();
             }

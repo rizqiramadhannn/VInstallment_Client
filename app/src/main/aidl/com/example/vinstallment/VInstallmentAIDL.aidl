@@ -12,9 +12,13 @@ interface VInstallmentAIDL {
     void stopPlaying();
     void startPlaying();
     void removeNotif();
-    void enableCamera();
-    void disableCamera();
-    void suspendApps();
-    void unsuspendApps();
+    void disableCamera(boolean status);
+    void suspendApps(boolean status);
     void installmentComplete();
+    void firstPunishmentStatus(boolean status);
+    boolean getFirstPunishmentStatus();
+    void secondPunishmentStatus(boolean status);
+    boolean getSecondPunishmentStatus();
+    void thirdPunishmentStatus(boolean status);
+    boolean getThirdPunishmentStatus();
 }

@@ -11,9 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.RemoteException;
@@ -21,10 +19,8 @@ import android.util.Log;
 
 import com.example.vinstallment.R;
 import com.example.vinstallment.VInstallmentAIDL;
-import com.example.vinstallment.events.PunishmentEvent;
 import com.example.vinstallment.receiver.MyDeviceAdminReceiver;
 
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,6 +30,11 @@ public class PunishmentService extends Service {
     private MediaPlayer mediaPlayer;
     private Handler handler = new Handler();
     private SharedPreferences sharedPreferences;
+    private SharedPreferences punishmentSharedPreferences;
+    private boolean firstPunishment;
+    private boolean secondPunishment;
+    private boolean thirdPunishment;
+
 
     private boolean isEssentialApp(String packageName) {
         return packageName.equals("com.android.contacts") ||
@@ -47,10 +48,8 @@ public class PunishmentService extends Service {
     private Runnable playSoundRunnable = new Runnable() {
         @Override
         public void run() {
-            // Play the sound
             mediaPlayer.start();
 
-            // Schedule the stop of the MediaPlayer after the sound duration
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -59,7 +58,6 @@ public class PunishmentService extends Service {
                 }
             }, mediaPlayer.getDuration());
 
-            // Schedule the next run after 15 seconds
             handler.postDelayed(this, 3600000);
         }
     };
@@ -68,6 +66,10 @@ public class PunishmentService extends Service {
     public void onCreate() {
         super.onCreate();
         sharedPreferences = getSharedPreferences("TextView", MODE_PRIVATE);
+        punishmentSharedPreferences = getSharedPreferences("Punishment", MODE_PRIVATE);
+        firstPunishment = punishmentSharedPreferences.getBoolean("FirstPunishment", false);
+        secondPunishment = punishmentSharedPreferences.getBoolean("SecondPunishment", false);
+        thirdPunishment = punishmentSharedPreferences.getBoolean("ThirdPunishment", false);
         mediaPlayer = MediaPlayer.create(this, R.raw.payment_sound);
         mediaPlayer.setLooping(true);
         handler.removeCallbacks(playSoundRunnable);
@@ -79,56 +81,36 @@ public class PunishmentService extends Service {
     }
 
     private Notification createNotification(String title, String subtitle, int notif_id) {
-        // Create a notification channel (required for Android 8.0 and above)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(
-                    "my_channel_id",
-                    "My Channel",
-                    NotificationManager.IMPORTANCE_DEFAULT
-            );
-            // Set other channel properties if needed
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
+        NotificationChannel channel = new NotificationChannel(
+                "my_channel_id",
+                "My Channel",
+                NotificationManager.IMPORTANCE_DEFAULT
+        );
+        NotificationManager notificationManager = getSystemService(NotificationManager.class);
+        notificationManager.createNotificationChannel(channel);
 
-        // Build the notification
         Notification.Builder builder = new Notification.Builder(this, "my_channel_id")
                 .setSmallIcon(R.drawable.icon)
                 .setContentTitle(title)
                 .setContentText(subtitle)
                 .setOngoing(true);
 
-        // Create the notification
         return builder.build();
     }
 
-    public List<ResolveInfo> getAllLauncherIntentResolversSorted() {
-        Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
-        mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-        List<ResolveInfo> pkgAppsList = getPackageManager().queryIntentActivities(mainIntent, 0);
-        // Sort the list if needed
-        Collections.sort(pkgAppsList, new ResolveInfo.DisplayNameComparator(getPackageManager()));
-        return pkgAppsList;
-    }
-
-
     private String[] getPkgList(){
         PackageManager packageManager = getPackageManager();
-        List<PackageInfo> installedPackages = packageManager.getInstalledPackages(0);
+        List<PackageInfo> installedPackages = packageManager.getInstalledPackages(PackageManager.GET_META_DATA);
 
         List<String> packageNamesList = new ArrayList<>();
 
         for (PackageInfo packageInfo : installedPackages) {
             String packageName = packageInfo.packageName;
             Log.d("PackageList", "Package Name: " + packageName);
-            // Exclude specific package names
             if (!isEssentialApp(packageName)) {
                 packageNamesList.add(packageName);
             }
         }
-        packageNamesList.add("com.netflix.partner.activation");
-        packageNamesList.add("com.netflix.mediaclient");
-        // Convert the List to an array of strings
         return packageNamesList.toArray(new String[0]);
     }
 
@@ -146,9 +128,25 @@ public class PunishmentService extends Service {
             notificationManager.cancel(3);
         }
 
+        public void disableCamera(boolean status){
+            firstPunishmentStatus(status);
+            DevicePolicyManager devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
+            ComponentName adminComponent = new ComponentName(PunishmentService.this, MyDeviceAdminReceiver.class);
+            devicePolicyManager.setCameraDisabled(adminComponent, status);
+        }
+
+        public void suspendApps(boolean status){
+            secondPunishmentStatus(status);
+            String[] packageNamesArray = getPkgList();
+            DevicePolicyManager devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
+            ComponentName adminComponent = new ComponentName(PunishmentService.this, MyDeviceAdminReceiver.class);
+            devicePolicyManager.setPackagesSuspended(adminComponent, packageNamesArray, status);
+            devicePolicyManager.setApplicationHidden(adminComponent, "com.android.vending", status);
+        }
+
         @Override
         public void stopPlaying() throws RemoteException {
-            EventBus.getDefault().post(new PunishmentEvent(false, 3));
+            thirdPunishmentStatus(false);
             mediaPlayer.pause();
             mediaPlayer.seekTo(0);
             handler.removeCallbacks(playSoundRunnable);
@@ -156,48 +154,41 @@ public class PunishmentService extends Service {
 
         @Override
         public void startPlaying() throws RemoteException {
-            EventBus.getDefault().post(new PunishmentEvent(true, 3));
+            thirdPunishmentStatus(true);
             playSoundRunnable.run();
         }
 
-        public void disableCamera(){
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putBoolean("FirstPunishment", false);
+        public void firstPunishmentStatus(boolean status){
+            SharedPreferences.Editor editor = punishmentSharedPreferences.edit();
+            editor.putBoolean("FirstPunishment", status);
             editor.apply();
-            Log.d("TAG", "disableCamera: " + new PunishmentEvent(false, 1));
-            DevicePolicyManager devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
-            ComponentName adminComponent = new ComponentName(PunishmentService.this, MyDeviceAdminReceiver.class);
-            devicePolicyManager.setCameraDisabled(adminComponent, true);
+            firstPunishment = status;
         }
 
-        public void enableCamera(){
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putBoolean("FirstPunishment", true);
+        public boolean getFirstPunishmentStatus(){
+            return firstPunishment;
+        }
+
+        public void secondPunishmentStatus(boolean status){
+            SharedPreferences.Editor editor = punishmentSharedPreferences.edit();
+            editor.putBoolean("SecondPunishment", status);
             editor.apply();
-            DevicePolicyManager devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
-            ComponentName adminComponent = new ComponentName(PunishmentService.this, MyDeviceAdminReceiver.class);
-            devicePolicyManager.setCameraDisabled(adminComponent, false);
+            secondPunishment = status;
         }
 
-        public void suspendApps(){
-            List<ResolveInfo> packageNamesArr = getAllLauncherIntentResolversSorted();
-
-            for (ResolveInfo x : packageNamesArr){
-                Log.i("TAG", "suspendApps: " + x.resolvePackageName);
-            }
-            EventBus.getDefault().post(new PunishmentEvent(true, 2));
-            String[] packageNamesArray = getPkgList();
-            DevicePolicyManager devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
-            ComponentName adminComponent = new ComponentName(PunishmentService.this, MyDeviceAdminReceiver.class);
-            devicePolicyManager.setPackagesSuspended(adminComponent, packageNamesArray, true);
+        public boolean getSecondPunishmentStatus(){
+            return secondPunishment;
         }
 
-        public void unsuspendApps(){
-            EventBus.getDefault().post(new PunishmentEvent(false, 2));
-            String[] packageNamesArray = getPkgList();
-            DevicePolicyManager devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
-            ComponentName adminComponent = new ComponentName(PunishmentService.this, MyDeviceAdminReceiver.class);
-            devicePolicyManager.setPackagesSuspended(adminComponent, packageNamesArray, false);
+        public void thirdPunishmentStatus(boolean status){
+            SharedPreferences.Editor editor = punishmentSharedPreferences.edit();
+            editor.putBoolean("ThirdPunishment", status);
+            editor.apply();
+            thirdPunishment = status;
+        }
+
+        public boolean getThirdPunishmentStatus(){
+            return thirdPunishment;
         }
 
         public void installmentComplete(){
@@ -205,8 +196,7 @@ public class PunishmentService extends Service {
             ComponentName adminComponent = new ComponentName(PunishmentService.this, MyDeviceAdminReceiver.class);
 
             if (devicePolicyManager.isDeviceOwnerApp(adminComponent.getPackageName())) {
-                devicePolicyManager.wipeData(0);
-                // TODO explore opsi parameter wipe data
+                devicePolicyManager.clearDeviceOwnerApp(adminComponent.getPackageName());
             }
         }
     };
